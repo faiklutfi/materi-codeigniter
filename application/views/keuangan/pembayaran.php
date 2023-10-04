@@ -72,7 +72,18 @@
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fa-solid fa-link"></i> Link</a>
             </li>
+            <li class="nav-item">
+              <!-- Tombol Export -->
+              <a href="<?php echo base_url('keuangan/export') ?>" class="bg-blue-500 hover:bg-blue-700 text-dark font-bold py-2 px-4 rounded"><i class="fas fa-file-export mr-2"></i> Export</a>
+            </li>
+            <li class="nav-item">
+              <!-- Tombol Import -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+                Import
+              </button>
+            </li>
           </ul>
+
         </div>
       </nav>
       <h1 style="background-color:blue; height: 60px;">Pembayaran</h1>
@@ -91,15 +102,14 @@
           foreach ($pembayaran as $row) : $no++ ?>
             <tr>
               <td><?php echo $no ?></td>
-              <td><?php echo $row->id_siswa ?></td>
+              <td><?php echo tampil_full_siswa_byid($row->id_siswa) ?></td>
               <td><?php echo $row->jenis_pembayaran ?></td>
               <td><?php echo $row->total_pembayaran ?></td>
               <td>
-                <a href="<?php echo base_url('Keuangan/ubah_pembayaran/') . $row->id_siswa ?>" class="btn btn-primary">Ubah</a>
-                <button onclick="hapus(<?php echo $row->id; ?>)"
-                                    class="btn btn-danger">
-                                    Hapus
-                                </button>
+                <a href="<?php echo base_url('Keuangan/ubah_pembayaran/') . $row->id ?>" class="btn btn-primary">Ubah</a>
+                <button onclick="hapus(<?php echo $row->id; ?>)" class="btn btn-danger">
+                  Hapus
+                </button>
               </td>
             </tr>
           <?php endforeach ?>
@@ -107,7 +117,36 @@
       </table>
       <a href="<?php echo base_url('Keuangan/tambah_pembayaran') ?>"><button type="submit" class="btn btn-primary w-25" name="submit">Tambah</button></a>
     </div>
+    <!-- Modal Import -->
+    <div class="modal" id="importModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Import File</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Form untuk memilih file -->
+            <<form class="mt-5" method="post" enctype="multipart/form-data" action="<?= base_url('keuangan/import') ?>">
+              <input type="file" name="file" />
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- tutup modal -->
   </div>
+  <!-- Tambahkan script jQuery dan Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <script>
     function hapus(id) {
       var yes = confirm('Yakin Di Hapus?');
@@ -115,6 +154,21 @@
         window.location.href = "<?php echo base_url('Keuangan/hapus_pembayaran/') ?>" + id;
       }
     }
+  </script>
+  <script>
+    function openModal() {
+      document.getElementById('importModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('importModal').classList.add('fadeOut');
+      setTimeout(function() {
+        document.getElementById('importModal').classList.add('hidden');
+        document.getElementById('importModal').classList.remove('fadeOut');
+      }, 300);
+    }
+
+    document.getElementById('importButton').addEventListener('click', openModal);
   </script>
 </body>
 

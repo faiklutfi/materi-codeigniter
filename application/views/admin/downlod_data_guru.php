@@ -13,7 +13,7 @@ header("Content-Disposition: attachment; filename=" . $nama . ".xls");
 </head>
 
 <body>
-    <h1>DATA PEMBAYARAN</h1>
+    <h1>DATA GURU</h1>
     <table style="font-size: 14px; font-weight: bold;">
         <tr>
             <td>Email</td>
@@ -34,6 +34,8 @@ header("Content-Disposition: attachment; filename=" . $nama . ".xls");
             <td>Nama Guru</td>
             <td>NIK</td>
             <td>Gender</td>
+            <td>mapel</td>
+            <td>kelas</td>
         </tr>
         <?php $no = 1;
         foreach ($data_guru as $key) { ?>
@@ -42,6 +44,8 @@ header("Content-Disposition: attachment; filename=" . $nama . ".xls");
                 <td><?php echo $key->nama_guru ?></td>
                 <td><?php echo $key->nik ?></td>
                 <td><?php echo $key->gender ?></td>
+                <td><?php echo tampil_full_mapel_byid($key->id_mapel) ?></td>
+                <td><?php echo tampil_full_kelas_byid($key->id_mapel) ?></td>
             </tr>
         <?php } ?>
     </table>

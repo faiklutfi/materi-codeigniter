@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Absensi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,33 +42,35 @@
             text-decoration: none;
         }
 
-        .dashboard {
-            margin-left: 250px;
+        .content {
+            margin-left: 270px;
             padding: 20px;
         }
 
-        .card {
-            width: 200px;
-            padding: 20px;
+        .container {
             text-align: center;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+            background-color: #fff;
             border-radius: 5px;
-            margin: 10px;
-            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
-        .card p {
-            font-size: 24px;
-            color: #007BFF;
+        h1 {
+            color: #333;
+        }
+
+        .absen-box {
+            width: 100%;
+            padding: 10px;
             margin: 10px 0;
         }
 
-        .fa-check,
-        .fa-calendar-days,
-        .fa-calculator {
-            font-size: 36px;
-            color: #007BFF;
+        .absen-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -91,33 +92,13 @@
             </li>
         </ul>
     </div>
-    <div class="dashboard">
-        <div class="card">
-            <i class="fa fa-check"></i>
-            <p id="jumlahMasuk">100</p>
-            Jumlah Masuk
-        </div>
-        <div class="card">
-            <i class="fa fa-calendar-days"></i>
-            <p id="jumlahIzin">25</p>
-            Jumlah Izin
-        </div>
-        <div class="card">
-            <i class="fa fa-calculator"></i>
-            <p id="jumlahTotal">0</p>
-            Total
+    <div class="content">
+        <div class="container">
+            <h1>Absensi</h1>
+            <input type="text" class="absen-box" id="absenInput" placeholder="Masukkan absensi di sini..."><br>
+            <button class="absen-button">Absen</button>
         </div>
     </div>
-
-    <script>
-        const jumlahMasukElement = document.getElementById('jumlahMasuk');
-        const jumlahIzinElement = document.getElementById('jumlahIzin');
-        const jumlahTotalElement = document.getElementById('jumlahTotal');
-        const jumlahMasuk = parseInt(jumlahMasukElement.textContent, 10);
-        const jumlahIzin = parseInt(jumlahIzinElement.textContent, 10);
-        const jumlahTotal = jumlahMasuk + jumlahIzin;
-        jumlahTotalElement.textContent = jumlahTotal;
-    </script>
 </body>
 
 </html>

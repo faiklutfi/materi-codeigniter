@@ -51,12 +51,12 @@
 <body>
     <div class="min-vh-100 d-flex align-items-center">
         <div class="container">
-            <h1 class="text-center text-light">Register Admin</h1>
+            <h1 class="text-center text-light">Register Karyawan</h1>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <form class="row g-3" action="<?= base_url('Auth/process_register_admin'); ?>" method="post">
+                            <form class="row g-3" action="<?= base_url('auth/process_register_karyawan'); ?>" method="post">
                                 <div class="col-md-6">
                                     <label for="inputName4" class="form-label">First Name</label>
                                     <input name="first_name" type="first name" class="form-control" id="inputName4">
@@ -77,17 +77,14 @@
                                     <label for="inputAddress2" class="form-label">Username</label>
                                     <input name="username" type="text" class="form-control" id="inputAddress2" placeholder="Username">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="inputCity" class="form-label">City</label>
-                                    <input name="" type="text" class="form-control" id="inputCity">
-                                </div>
+
                                 <div class="text-center py-2 col-12">
                                     <button type="submit" class="btn btn-primary">Sign in</button>
                                 </div>
                             </form>
-                            <div class="text-center">
+                            <!-- <div class="text-center">
                                 <span><a class="text-white" href="<?= base_url('auth'); ?>">Klik di sini bila sudah memiliki akun</a></span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

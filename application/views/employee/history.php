@@ -47,27 +47,56 @@
             padding: 20px;
         }
 
+        /* CSS untuk tabel */
         .table {
-            margin-top: 20px;
+            margin-top: 5px;
+            border-collapse: collapse;
+            width: 100%;
         }
 
-        h2 {
-            color: #333;
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
         }
 
-        .table-dark {
+        .table th {
             background-color: #333;
             color: #fff;
         }
 
-        .text-center {
-            text-align: center;
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
+        /* CSS untuk h2 */
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* CSS untuk tombol */
         .btn {
-            padding: 5px 10px;
+            padding: 8px 16px;
             text-decoration: none;
-            margin-right: 5px;
+            margin-right: 10px;
+            background-color: #6699ff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        /* CSS untuk teks tengah */
+        .text-center {
+            text-align: center;
         }
     </style>
 </head>
@@ -107,7 +136,7 @@
                 <?php foreach ($absensi as $row) : ?>
                     <tr class="text-center">
                         <td><?php echo $no = 1; ?></td>
-                        <td><?php echo $row->tanggal ?></td>
+                        <td><?php echo $row->date ?></td>
                         <td><?php echo $row->jam_masuk ?></td>
                         <td><?php echo $row->jam_pulang ?></td>
                         <td><?php echo $row->status ?></td>

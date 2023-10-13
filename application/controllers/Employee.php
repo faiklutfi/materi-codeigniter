@@ -21,13 +21,17 @@ class Employee extends CI_Controller
     }
     public function history()
     {
-        $this->load->view('employee/history');
+        $data['absensi'] = $this->m_model->get_data('absensi')->result();
+        $this->load->view('employee/history', $data);
     }
     public function menu_izin()
     {
         $this->load->view('employee/menu_izin');
     }
-
+    public function profile()
+    {
+        $this->load->view('employee/profile');
+    }
     public function aksi_menu_absen()
     {
         if ($this->session->userdata('role') === 'employee') {

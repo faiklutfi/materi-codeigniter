@@ -46,6 +46,7 @@
         .dashboard {
             margin-left: 250px;
             padding: 20px;
+            width: 200px;
         }
 
         .card {

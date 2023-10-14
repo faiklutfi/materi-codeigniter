@@ -155,21 +155,10 @@
         </table>
     </div>
 
-    <script>
-        <?php foreach ($absensi as $row) : ?>
-            var absensiId = <?php echo $row->id; ?>;
-            var status = '<?php echo $row->status; ?>';
-            disablePulangButton(absensiId, status);
-        <?php endforeach; ?>
+    <td>
 
-        function disablePulangButton(absenId, status) {
-            var pulangButton = document.getElementById("pulangButton_" + absenId);
-            if (status === 'pulang') {
-                pulangButton.classList.add("disabled");
-                pulangButton.removeAttribute("href");
-            }
-        }
-    </script>
+        </a>
+    </td>
 </body>
 
 </html>

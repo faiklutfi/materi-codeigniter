@@ -51,7 +51,7 @@ class Auth extends CI_Controller
                 if ($this->session->userdata('role') == 'admin') {
                     redirect(base_url() . 'admin');
                 } elseif ($this->session->userdata('role') == 'karyawan') {
-                    redirect(base_url() . 'employee');
+                    redirect(base_url() . 'karyawan');
                 } else {
                     redirect(base_url() . 'auth');
                 }
@@ -66,13 +66,13 @@ class Auth extends CI_Controller
 
     public function process_register_karyawan()
     {
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|regex_match[/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|regex_match[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/]');
+        $this->form_validation->set_rules('password', 'Password', 'required|regex_match[/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/]');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('auth/register_karyawan');
         } else {
-            $hashed_password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+            $hashed_password = md5($this->input->post('password'));
 
             $data = [
                 'username' => $this->input->post('username'),
@@ -81,22 +81,14 @@ class Auth extends CI_Controller
                 'email' => $this->input->post('email'),
                 'password' => $hashed_password,
                 'role' => 'karyawan',
+                'image' => $this->input->post('user.png')
             ];
 
-            $result = $this->db->insert('user', $data);
+            $this->db->insert('user', $data);
 
-            if ($result) {
-                // Registrasi sukses, arahkan ke halaman login
-                redirect(base_url('auth'));
-            } else {
-                // Registrasi gagal, tampilkan pesan kesalahan
-                $error_message = $this->db->error();
-                echo "Registrasi gagal. Pesan kesalahan: " . $error_message['message'];
-            }
+            redirect(base_url('auth'));
         }
     }
-
-
 
     public function process_register_admin()
     {

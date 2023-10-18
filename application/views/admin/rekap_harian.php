@@ -17,7 +17,7 @@
                     <h5>Rekap Harian</h5>
                 </div>
                 <div class="card-body">
-                    <form action="<?= base_url('admin/rekapPerHari'); ?>" method="get">
+                    <form action="<?= base_url('admin/rekap_harian'); ?>" method="get">
                         <div class="d-flex justify-content-between">
                             <input type="date" class="form-control" id="tanggal" name="tanggal" value="<?php echo isset($_GET['tanggal']) ? $_GET['tanggal'] : ''; ?>">
                             <button type="submit" name="submit" class="btn btn-sm btn-primary" formaction="<?php echo base_url('admin/export_harian') ?>">Export</button>
@@ -28,7 +28,7 @@
                     <hr>
                     <br>
                     <div class="table-responsive">
-                        <?php if (!empty($perhari)) : ?>
+                        <?php if (!empty($rekap_harian)) : ?>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -42,14 +42,14 @@
                                 </thead>
                                 <tbody>
                                     <?php $no = 0;
-                                    foreach ($perhari as $rekap) : $no++ ?>
+                                    foreach ($rekap_harian as $rekap) : $no++ ?>
                                         <tr>
                                             <td><?= $no; ?></td>
-                                            <td><?= $rekap['date']; ?></td>
-                                            <td><?= $rekap['kegiatan']; ?></td>
-                                            <td><?= $rekap['jam_masuk']; ?></td>
-                                            <td><?= $rekap['jam_pulang']; ?></td>
-                                            <td><?= $rekap['keterangan_izin']; ?></td>
+                                            <td><?= $rekap->kegiatan; ?></td>
+                                            <td><?= $rekap->tanggal ?></td>
+                                            <td><?= $rekap->jam_masuk; ?></td>
+                                            <td><?= $rekap->jam_pulang; ?></td>
+                                            <td><?= $rekap->keterangan_izin; ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

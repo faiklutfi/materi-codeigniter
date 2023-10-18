@@ -16,11 +16,11 @@ class Admin_model extends CI_Model
 
     public function getRekapHarian($tanggal)
     {
-        $this->db->select('absensi.id, absensi.tanggal, absensi.kegiatan, absensi.id_karyawan, absensi.jam_masuk, absensi.jam_pulang, absensi.status');
+        $this->db->select('absensi.*');
         $this->db->from('absensi');
         $this->db->where('absensi.tanggal', $tanggal); // Menyaring data berdasarkan tanggal
         $query = $this->db->get();
-        return $query->result_array();
+        return $query->result();
     }
 
     public function getAbsensiLast7Days()
@@ -35,7 +35,7 @@ class Admin_model extends CI_Model
             ->group_by('tanggal, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status')
             ->get();
 
-        return $query->result_array();
+        return $query->result();
     }
 
 
@@ -51,7 +51,7 @@ class Admin_model extends CI_Model
 
     public function getRekapHarianByBulan($bulan)
     {
-        $this->db->select('absensi.id, absensi.tanggal, absensi.kegiatan, absensi.id_karyawan, absensi.jam_masuk, absensi.jam_pulang, absensi.status');
+        $this->db->select('absensi.*');
         $this->db->from('absensi');
         $this->db->where('MONTH(absensi.tanggal)', $bulan);
         $query = $this->db->get();

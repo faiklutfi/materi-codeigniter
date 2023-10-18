@@ -17,20 +17,17 @@
                     <h5>Rekap Mingguan</h5>
                 </div>
                 <div class="card-body">
-                    <form action="<?= base_url('admin/rekapPerMinggu'); ?>" method="post" class="row g-3">
-                        <div class="col-md-4">
+                    <form action="<?= base_url('admin/rekap_mingguan'); ?>" method="get">
+                        <div class="d-flex justify-content-between">
                             <div class="input-group">
                                 <span class="input-group-text">Tanggal awal</span>
-                                <input type="date" class="form-control" id="start_date" name="start_date">
+                                <input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo isset($_GET['start_date']) ? $_GET['start_date'] : ''; ?>">
                             </div>
-                        </div>
-                        <div class="col-md-4">
                             <div class="input-group">
-                                <span class="input-group-text">Tanggal awal</span>
-                                <input type="date" class="form-control" id="end_date" name="end_date">
+                                <span class="input-group-text">Tanggal akhir</span>
+                                <input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo isset($_GET['end_date']) ? $_GET['end_date'] : ''; ?>">
                             </div>
-                        </div>
-                        <div class="col-md-4">
+                            <button type="submit" name="submit" class="btn btn-sm btn-primary" formaction="<?php echo base_url('admin/export_mingguan') ?>">Export</button>
                             <button type="submit" class="btn btn-success">Filter</button>
                         </div>
                     </form>
@@ -38,9 +35,9 @@
                     <hr>
                     <br>
                     <div class="table-responsive">
-                        <?php if (empty($perminggu)) : ?>
+                        <?php if (empty($absensi)) : ?>
                             <h5 class="text-center">Tidak ada data diminggu ini ini.</h5>
-                            <p class="text-center">Silahkan pilih Minggu lain.</p>
+                            <p class="text-center">Silahkan pilih Mingguan lain.</p>
                         <?php else : ?>
                             <table class="table">
                                 <thead>
@@ -55,10 +52,10 @@
                                 </thead>
                                 <tbody>
                                     <?php $no = 0;
-                                    foreach ($perminggu as $rekap) : $no++; ?>
+                                    foreach ($absensi as $rekap) : $no++; ?>
                                         <tr>
                                             <td><?= $no; ?></td>
-                                            <td><?= $rekap->date; ?></td>
+                                            <td><?= $rekap->tanggal; ?></td>
                                             <td><?= $rekap->kegiatan; ?></td>
                                             <td><?= $rekap->jam_masuk; ?></td>
                                             <td><?= $rekap->jam_pulang; ?></td>

@@ -483,7 +483,7 @@
                 <button class="menu-toggle">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-warning">App</span><i class="fa-solid fa-building text-warning"></i></a>
+                <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-primary">App</span></a>
             </header>
             <nav class="dashboard-nav-list">
                 <a href="<?= base_url('admin'); ?>" class="dashboard-nav-item"></i>Dashboard
@@ -496,7 +496,7 @@
                 </a>
                 <a href="<?= base_url('admin/rekap_bulanan'); ?>" class="dashboard-nav-item"></i> Rekap Bulanan
                 </a>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout
+                <a href="<?= base_url('auth/logout') ?>" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
         </div>

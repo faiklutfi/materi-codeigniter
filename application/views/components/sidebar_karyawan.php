@@ -484,21 +484,21 @@
                 <button class="menu-toggle">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-warning">App</span><i class="fa-solid fa-building text-warning"></i></a>
+                <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-primary">App</span></a>
             </header>
             <nav class="dashboard-nav-list">
-                <a href="<?= base_url('karyawan'); ?>" class="dashboard-nav-item"><i class="fa-solid fa-gauge"></i>Dashboard
+                <a href="<?= base_url('karyawan'); ?>" class="dashboard-nav-item"></i>Dashboard
                 </a>
-                <a href="<?= base_url('karyawan/history_absen'); ?>" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> History Absen
+                <a href="<?= base_url('karyawan/history_absen'); ?>" class="dashboard-nav-item"></i> History Absen
                 </a>
-                <a href="<?= base_url('karyawan/menu_absen'); ?>" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Menu Absen
+                <a href="<?= base_url('karyawan/menu_absen'); ?>" class="dashboard-nav-item"></i> Menu Absen
                 </a>
-                <a href="<?= base_url('karyawan/menu_izin'); ?>" class="dashboard-nav-item"><i class="fa-solid fa-viruses"></i> Menu Izin
+                <a href="<?= base_url('karyawan/menu_izin'); ?>" class="dashboard-nav-item"></i> Menu Izin
                 </a>
-                <a href="<?= base_url('karyawan/profile'); ?>" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile
+                <a href="<?= base_url('karyawan/profile'); ?>" class="dashboard-nav-item"></i> Profile
                 </a>
                 <div class="nav-item-divider"></div>
-                <a href="#" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout
+                <a href="<?= base_url('auth/logout') ?>" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </nav>
         </div>

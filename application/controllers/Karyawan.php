@@ -195,21 +195,62 @@ class Karyawan extends CI_Controller
         $this->load->view('karyawan/profile', $data);
     }
 
+    // untuk upload image
     public function upload_image($field_name)
     {
-        $config['upload_path'] = './images/karyawan/';
+        $config['upload_path'] = './images/user/';
         $config['allowed_types'] = 'jpg|png|jpeg';
         $config['max_size'] = 30000;
 
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload($field_name)) {
-            $error = array('error' => $this->upload->display_errors());
+            $error = $this->upload->display_errors();
             return array(false, $error);
         } else {
             $data = $this->upload->data();
             $file_name = $data['file_name'];
             return array(true, $file_name);
+        }
+    }
+
+
+    // untuk aksi profil
+    public function aksi_update_profile()
+    {
+        $this->load->model('m_model'); // Memuat model
+
+        $email = $this->input->post('email');
+        $username = $this->input->post('username');
+        $first_name = $this->input->post('nama_depan'); // Ganti 'nama_depan' menjadi 'first_name'
+        $last_name = $this->input->post('nama_belakang'); // Ganti 'nama_belakang' menjadi 'last_name'
+
+        // Mengekstrak foto yang diunggah
+        list($upload_status, $image_name) = $this->upload_image('image');
+
+        if ($upload_status) {
+            // Foto berhasil diunggah, tambahkan nama file foto ke data
+            $data = [
+                'foto' => $image_name,
+                'email' => $email,
+                'username' => $username,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+            ];
+            $this->session->set_userdata($data);
+
+            // Menggunakan model untuk memperbarui data dalam database
+            $update_result = $this->M_model->updateProfile($this->session->userdata('id'), $data);
+
+            if ($update_result) {
+                redirect(base_url('karyawan/profil_karyawan'));
+            } else {
+                // Pembaruan gagal, Anda dapat menangani ini sesuai kebutuhan
+                echo "Gagal memperbarui profil. Error: " . $this->db->error()['message'];
+            }
+        } else {
+            // Upload foto gagal, tampilkan pesan kesalahan
+            echo "Gagal mengunggah foto. Error: " . $image_name;
         }
     }
 
@@ -264,7 +305,7 @@ class Karyawan extends CI_Controller
                 'last_name' => $last_name,
             ];
             if (!empty($password_baru)) {
-                if ($password_baru === konfirmasi_password) {
+                if ($password_baru === $konfirmasi_password) {
                     $data['password'] = md5($password_baru);
                 } else {
                     $this->session->set_flashdata('message', 'Password baru dan Konfirmasi password harus sama');
@@ -282,47 +323,78 @@ class Karyawan extends CI_Controller
         }
     }
 
-    public function import_karyawan()
+    public function edit_foto()
     {
-        if (isset($_FILES["file"]["name"])) {
-            // Pastikan file yang diunggah adalah file Excel
-            $allowedFileTypes = ['application/vnd.ms-excel', 'text/xls', 'text/xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
-            if (in_array($_FILES["file"]["type"], $allowedFileTypes)) {
-                // Path file yang diunggah
-                $path = $_FILES["file"]["tmp_name"];
+        $config['upload_path'] = './assets/images/user/';
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['max_size'] = 5120;
 
-                // Load file Excel menggunakan PhpSpreadsheet
-                $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
-                $worksheet = $spreadsheet->getActiveSheet();
+        $this->load->library('upload', $config);
 
-                // Loop melalui data di file Excel dan masukkan ke dalam database
-                foreach ($worksheet->getRowIterator(2) as $row) {
-                    $namaKaryawan = $worksheet->getCellByColumnAndRow(2, $row->getRowIndex())->getValue();
-                    $kegiatan = $worksheet->getCellByColumnAndRow(3, $row->getRowIndex())->getValue();
-                    $tanggal = $worksheet->getCellByColumnAndRow(4, $row->getRowIndex())->getValue();
-                    $jamMasuk = $worksheet->getCellByColumnAndRow(5, $row->getRowIndex())->getValue();
-                    $jamPulang = $worksheet->getCellByColumnAndRow(6, $row->getRowIndex())->getValue();
-                    $status = $worksheet->getCellByColumnAndRow(7, $row->getRowIndex())->getValue();
+        if ($this->upload->do_upload('userfile')) {
+            $upload_data = $this->upload->data();
+            $file_name = $upload_data['file_name'];
 
-                    // Simpan data ke dalam database, sesuaikan dengan struktur tabel Anda
-                    $data = [
-                        'kegiatan' => $kegiatan,
-                        'tanggal' => $tanggal,
-                        'jam_masuk' => $jam_masuk,
-                        'jam_pulang' => $jam_pulang,
-                        'status' => $status,
-                    ];
 
-                    $this->karyawan_model->tambah_data('absensi', $data);
-                }
+            $user_id = $this->session->userdata('id');
+            $current_image = $this->karyawan_model->get_current_image($user_id);
 
-                // Redirect ke halaman yang sesuai setelah import selesai
-                redirect(base_url('karyawan/history_absen'));
-            } else {
-                echo 'Tipe file tidak didukung.';
+            if ($current_image !== 'User.png') {
+                unlink('./assets/images/user/' . $current_image);
             }
+
+            $this->karyawan_model->update_image($user_id, $file_name);
+            $this->session->set_flashdata('berhasil_ubah_foto', 'Foto berhasil diperbarui.');
+
+
+            redirect('karyawan/profile');
         } else {
-            echo 'File tidak diunggah.';
+            $error = array('error' => $this->upload->display_errors());
+            $this->session->set_flashdata('error_profile', $error['error']);
+            redirect('karyawan');
         }
     }
+    // public function import_karyawan()
+    // {
+    //     if (isset($_FILES["file"]["name"])) {
+    //         // Pastikan file yang diunggah adalah file Excel
+    //         $allowedFileTypes = ['application/vnd.ms-excel', 'text/xls', 'text/xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+    //         if (in_array($_FILES["file"]["type"], $allowedFileTypes)) {
+    //             // Path file yang diunggah
+    //             $path = $_FILES["file"]["tmp_name"];
+
+    //             // Load file Excel menggunakan PhpSpreadsheet
+    //             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+    //             $worksheet = $spreadsheet->getActiveSheet();
+
+    //             // Loop melalui data di file Excel dan masukkan ke dalam database
+    //             foreach ($worksheet->getRowIterator(2) as $row) {
+    //                 $namaKaryawan = $worksheet->getCellByColumnAndRow(2, $row->getRowIndex())->getValue();
+    //                 $kegiatan = $worksheet->getCellByColumnAndRow(3, $row->getRowIndex())->getValue();
+    //                 $tanggal = $worksheet->getCellByColumnAndRow(4, $row->getRowIndex())->getValue();
+    //                 $jamMasuk = $worksheet->getCellByColumnAndRow(5, $row->getRowIndex())->getValue();
+    //                 $jamPulang = $worksheet->getCellByColumnAndRow(6, $row->getRowIndex())->getValue();
+    //                 $status = $worksheet->getCellByColumnAndRow(7, $row->getRowIndex())->getValue();
+
+    //                 // Simpan data ke dalam database, sesuaikan dengan struktur tabel Anda
+    //                 $data = [
+    //                     'kegiatan' => $kegiatan,
+    //                     'tanggal' => $tanggal,
+    //                     'jam_masuk' => $jam_masuk,
+    //                     'jam_pulang' => $jam_pulang,
+    //                     'status' => $status,
+    //                 ];
+
+    //                 $this->karyawan_model->tambah_data('absensi', $data);
+    //             }
+
+    //             // Redirect ke halaman yang sesuai setelah import selesai
+    //             redirect(base_url('karyawan/history_absen'));
+    //         } else {
+    //             echo 'Tipe file tidak didukung.';
+    //         }
+    //     } else {
+    //         echo 'File tidak diunggah.';
+    //     }
+    // }
 }

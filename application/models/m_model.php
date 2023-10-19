@@ -22,6 +22,7 @@ class m_model extends CI_Model
         return $this->db->insert_id();
     }
 
+
     public function get_by_id($tabel, $id_column, $id)
     {
         $data = $this->db->where($id_column, $id)->get($tabel);

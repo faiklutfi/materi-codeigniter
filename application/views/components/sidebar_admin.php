@@ -486,7 +486,7 @@
                 <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-primary">App</span></a>
             </header>
             <nav class="dashboard-nav-list">
-                <a href="<?= base_url('admin'); ?>" class="dashboard-nav-item"></i>Dashboard
+                <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i>Dashboard
                 </a>
                 <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i> Karyawan
                 </a>

@@ -15,9 +15,6 @@
         <div class="col-md-9">
             <h2>Riwayat Absen</h2>
             <div class="py-3">
-                <button type="button" class="btn btn-outline-warning mb-2" data-bs-toggle="modal" data-bs-target="#myModal">
-                    Buka Modal
-                </button>
 
                 <!-- modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,10 +89,7 @@
                                 <?php if ($row->status != 'done') : ?>
                                     <a href="<?php echo site_url('karyawan/ubah_absensi/' . $row->id); ?>" class="btn btn-warning">Ubah</a>
                                 <?php endif; ?>
-                                <a href="javascript:void(0);" class="btn btn-danger" onclick="confirmDelete(<?php echo $row->id; ?>)">Hapus</a>
-                            </td>
-                        </tr>
-                    <?php } ?>
+                            <?php } ?>
                 </tbody>
             </table>
         </div>

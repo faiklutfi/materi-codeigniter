@@ -57,7 +57,7 @@
                                 <div class="mb-3">
                                     <input type="text" class="form-control" name="email" placeholder="Email" required>
                                 </div>
-                                <span class="text-center">Password Minimal 8 Karakter </span>
+                                <span class="text-center"></span>
                                 <div class="mb-3 position-relative">
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                     <span class="fa fa-fw fa-eye-slash field-icon toggle-password" onclick="togglePassword()"></span>

@@ -14,10 +14,17 @@
 <body>
     <?php $this->load->view('components/sidebar_admin'); ?>
 
+
+    <!-- Tambahkan tag-head Anda di sini, seperti CSS dan JavaScript yang dibutuhkan -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/your/custom.css">
+    </head>
+
     <!-- Konten utama halaman Dashboard Admin -->
     <main class="text-center">
         <!-- Isi konten utama Anda di sini -->
     </main>
+
 
     <!-- Tambahkan tag-script Anda di sini, seperti JavaScript yang dibutuhkan -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

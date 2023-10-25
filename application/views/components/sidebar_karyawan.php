@@ -484,18 +484,18 @@
                 <button class="menu-toggle">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-primary">App</span></a>
+                <a href="#" class="brand-logo"> <span>KARYAWAN </span> <span class="text-primary"></span></a>
             </header>
             <nav class="dashboard-nav-list">
-                <a href="<?= base_url('karyawan'); ?>" class="dashboard-nav-item"></i>Dashboard
+                <a href="<?= base_url('karyawan'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-users"></i>Dashboard
                 </a>
-                <a href="<?= base_url('karyawan/history_absen'); ?>" class="dashboard-nav-item"></i> History Absen
+                <a href="<?= base_url('karyawan/history_absen'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-person"></i>History Absen
                 </a>
-                <a href="<?= base_url('karyawan/menu_absen'); ?>" class="dashboard-nav-item"></i> Menu Absen
+                <a href="<?= base_url('karyawan/menu_absen'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-person-dress"></i>Menu Absen
                 </a>
-                <a href="<?= base_url('karyawan/menu_izin'); ?>" class="dashboard-nav-item"></i> Menu Izin
+                <a href="<?= base_url('karyawan/menu_izin'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-shop"></i>Menu Izin
                 </a>
-                <a href="<?= base_url('karyawan/profile'); ?>" class="dashboard-nav-item"></i> Profile
+                <a href="<?= base_url('karyawan/profile'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-face-smile"></i>Profile
                 </a>
                 <div class="nav-item-divider"></div>
                 <a href="<?= base_url('auth/logout') ?>" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout

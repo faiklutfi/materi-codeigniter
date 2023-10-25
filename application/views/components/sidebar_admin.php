@@ -483,18 +483,18 @@
                 <button class="menu-toggle">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <a href="#" class="brand-logo"> <span>ABSENT </span> <span class="text-primary">App</span></a>
+                <a href="#" class="brand-logo"> <span>ADMIN </span> <span class="text-primary"></span></a>
             </header>
             <nav class="dashboard-nav-list">
-                <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i>Dashboard
+                <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-users"></i>Dashboard
                 </a>
-                <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i> Karyawan
+                <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-person"></i> Karyawan
                 </a>
-                <a href="<?= base_url('admin/rekap_harian'); ?>" class="dashboard-nav-item"></i> Rekap Harian
+                <a href="<?= base_url('admin/rekap_harian'); ?>" class="dashboard-nav-item"></i> <i class="fa-solid fa-bicycle"></i>Rekap Harian
                 </a>
-                <a href="<?= base_url('admin/rekap_mingguan'); ?>" class="dashboard-nav-item"></i> Rekap Mingguan
+                <a href="<?= base_url('admin/rekap_mingguan'); ?>" class="dashboard-nav-item"></i> <i class="fa-solid fa-truck"></i>Rekap Mingguan
                 </a>
-                <a href="<?= base_url('admin/rekap_bulanan'); ?>" class="dashboard-nav-item"></i> Rekap Bulanan
+                <a href="<?= base_url('admin/rekap_bulanan'); ?>" class="dashboard-nav-item"></i> <i class="fa-solid fa-car"></i>Rekap Bulanan
                 </a>
                 <a href="<?= base_url('auth/logout') ?>" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout
                 </a>

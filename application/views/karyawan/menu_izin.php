@@ -4,6 +4,34 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="path/to/your/custom.css">
+    <style>
+        /* Custom CSS for your page */
+        .form-container {
+            margin-top: 50px;
+            border: 1px solid #d4d4d4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #izinForm {
+            max-width: 100%;
+        }
+
+        #keterangan {
+            width: 100%;
+        }
+
+        #ajukanButton {
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+        }
+
+        #ajukanButton:hover {
+            background-color: #23272b;
+        }
+    </style>
 </head>
 
 <body>
@@ -11,7 +39,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 form-container">
-                <h1>Form Izin Karyawan</h1>
+                <h1 class="text-center">Form Izin Karyawan</h1>
                 <form action="<?= base_url('karyawan/menu_izin'); ?>" method="post" id="izinForm">
                     <div class="mb-3">
                         <label for="keterangan">Keterangan Izin</label>

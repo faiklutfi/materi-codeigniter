@@ -6,6 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REKAP BULANAN</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/responsive.css'); ?>">
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .main {
+            margin: 2em;
+        }
+
+        .container {
+            width: 75%;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .card-header {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            margin-right: 10px;
+        }
+
+        select.form-control {
+            width: 200px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
 </head>
 
 <body>

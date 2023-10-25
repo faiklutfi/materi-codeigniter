@@ -120,28 +120,33 @@ class Karyawan_model extends CI_Model
         return $this->db->count_all($table);
     }
 
-    public function get_current_image($user_id)
+    public function get_karyawan_image_by_id($id)
     {
         $this->db->select('image');
-        $this->db->from('user'); // Gantilah 'user_table' dengan nama tabel Anda
-        $this->db->where('id', $user_id);
+        $this->db->from('user');
+        $this->db->where('id', $id);
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            $row = $query->row();
-            return $row->image;
+            $result = $query->row();
+            return $result->image;
+        } else {
+            return false;
         }
-
-        return null; // Kembalikan null jika data tidak ditemukan
+    }
+    public function ubah_data($tabel, $data, $where)
+    {
+        $data = $this->db->update($tabel, $data, $where);
+        return $this->db->affected_rows();
     }
 
-    public function update_image($user_id, $new_image)
+    public function update_image($akun_id, $new_image)
     {
         $data = array(
             'image' => $new_image
         );
 
-        $this->db->where('id', $user_id); // Sesuaikan dengan kolom dan nama tabel yang sesuai
+        $this->db->where('id', $akun_id); // Sesuaikan dengan kolom dan nama tabel yang sesuai
         $this->db->update('user', $data); // Sesuaikan dengan nama tabel Anda
 
         return $this->db->affected_rows(); // Mengembalikan jumlah baris yang diupdate

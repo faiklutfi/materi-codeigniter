@@ -83,6 +83,7 @@
                         <td><?php echo $row['status']; ?></td>
 
                     </tr>
+
                 <?php endforeach; ?>
             </tbody>
         </table>

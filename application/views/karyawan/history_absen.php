@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Absen</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="path/to/your/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -76,18 +76,20 @@
                                 <?php else : ?>
                                     <?php if ($row->status == 'pulang') : ?>
                                         <!-- Jika status 'pulang', tampilkan tombol "Batal Pulang" -->
-                                        <a href="<?php echo site_url('karyawan/batal_pulang/' . $row->id); ?>" class="btn btn-danger">Batal Pulang</a>
+                                        <a href="<?php echo site_url('karyawan/batal_pulang/' . $row->id); ?>" class="btn btn-success disabled" aria-disabled="true"><i class="fa-solid fa-house"></i></a>
                                     <?php else : ?>
                                         <!-- Jika status bukan 'pulang', tampilkan tombol "Pulang" -->
                                         <a href="<?php echo site_url('karyawan/pulang/' . $row->id); ?>" class="btn btn-success" id="pulangButton_<?php echo $row->id; ?>">
-                                            Pulang
+                                            <i class="fa-solid fa-house"></i>
                                         </a>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($row->status != 'done') : ?>
-                                    <a href="<?php echo site_url('karyawan/ubah_absensi/' . $row->id); ?>" class="btn btn-warning">Ubah</a>
+                                    <a href="<?php echo site_url('karyawan/ubah_absensi/' . $row->id); ?>" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $row->id; ?>)" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                 <?php endif; ?>
                             <?php } ?>
                 </tbody>
@@ -128,7 +130,7 @@
         function confirmDelete(absenId) {
             Swal.fire({
                 title: 'Konfirmasi Hapus',
-                text: 'Anda yakin ingin menghapus item ini?',
+                text: 'Anda yakin ingin menghapus absen ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

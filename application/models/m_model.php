@@ -29,6 +29,12 @@ class m_model extends CI_Model
         return ($data);
     }
 
+    public function update_data($table, $data, $where)
+    {
+        $this->db->update($table, $data, $where);
+        return $this->db->affected_rows();
+    }
+
     public function ubah_data($tabel, $data, $where)
     {
         $data = $this->db->update($tabel, $data, $where);

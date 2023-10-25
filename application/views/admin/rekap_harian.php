@@ -6,12 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/responsive.css'); ?>">
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .main {
+            margin: 2em;
+        }
+
+        .container {
+            width: 75%;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .card-header {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            margin-right: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
     <?php $this->load->view('components/sidebar_admin'); ?>
-    <div class="main m-4">
-        <div class="container w-75">
+    <div class="main">
+        <div class="container">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5>Rekap Harian</h5>
@@ -55,7 +113,7 @@
                                 </tbody>
                             </table>
                         <?php else : ?>
-                            <h5 class="text-center">Tidak ada data untuk tanggal ini.</h5>
+                            <h5 class="text-center error-message">Tidak ada data untuk tanggal ini.</h5>
                             <p class="text-center">Silahkan pilih tanggal lain.</p>
                         <?php endif; ?>
                     </div>

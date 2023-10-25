@@ -60,20 +60,24 @@
                     <tr class="text-center">
                         <th>No</th>
                         <th>Tanggal</th>
+                        <th>Kegiatan</th>
+                        <th>Keterangan Izin</th>
                         <th>Jam Masuk</th>
                         <th>Jam Pulang</th>
-                        <th>Status</th>
+                        <th>Status</bth>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 0;
                     foreach ($absensi as $row) : $no++ ?>
                         <tr class="text-center">
-                            <td><?php echo $no ?></td>
-                            <td><?php echo $row->tanggal ?></td>
-                            <td><?php echo $row->jam_masuk ?></td>
-                            <td><?php echo $row->jam_pulang ?></td>
-                            <td><?php echo $row->status ?></td>
+                            <td><?php echo $no; ?></td>
+                            <td><?php echo $row->tanggal; ?></td>
+                            <td><?php echo $row->kegiatan; ?></td>
+                            <td><?php echo $row->keterangan_izin; ?></td>
+                            <td><?php echo $row->jam_masuk; ?></td>
+                            <td><?php echo $row->jam_pulang; ?></td>
+                            <td><?php echo $row->status; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

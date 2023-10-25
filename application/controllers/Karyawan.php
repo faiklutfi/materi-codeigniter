@@ -10,6 +10,7 @@ class Karyawan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('karyawan_model');
+        $this->load->model('m_model');
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->library('upload');
@@ -191,167 +192,104 @@ class Karyawan extends CI_Controller
 
     public function profile()
     {
-        $data['user'] = $this->karyawan_model->get_by_id('user', 'id', $this->session->userdata('id'));
+        $data['user'] = $this->m_model->get_by_id('user', 'id', $this->session->userdata('id'))->result();
         $this->load->view('karyawan/profile', $data);
     }
 
-    // untuk upload image
-    public function upload_image($field_name)
+
+
+    public function edit_profile()
     {
-        $config['upload_path'] = './images/user/';
-        $config['allowed_types'] = 'jpg|png|jpeg';
-        $config['max_size'] = 30000;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload($field_name)) {
-            $error = $this->upload->display_errors();
-            return array(false, $error);
-        } else {
-            $data = $this->upload->data();
-            $file_name = $data['file_name'];
-            return array(true, $file_name);
-        }
-    }
-
-
-    // untuk aksi profil
-    public function aksi_update_profile()
-    {
-        $this->load->model('m_model'); // Memuat model
-
+        $password_baru = $this->input->post('password_baru');
+        $konfirmasi_password = $this->input->post('konfirmasi_password');
         $email = $this->input->post('email');
         $username = $this->input->post('username');
-        $first_name = $this->input->post('nama_depan'); // Ganti 'nama_depan' menjadi 'first_name'
-        $last_name = $this->input->post('nama_belakang'); // Ganti 'nama_belakang' menjadi 'last_name'
+        $first_name = $this->input->post('first_name');
+        $last_name = $this->input->post('last_name');
 
-        // Mengekstrak foto yang diunggah
-        list($upload_status, $image_name) = $this->upload_image('image');
+        $data = array(
+            'email' => $email,
+            'username' => $username,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+        );
 
-        if ($upload_status) {
-            // Foto berhasil diunggah, tambahkan nama file foto ke data
-            $data = [
-                'foto' => $image_name,
-                'email' => $email,
-                'username' => $username,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-            ];
-            $this->session->set_userdata($data);
-
-            // Menggunakan model untuk memperbarui data dalam database
-            $update_result = $this->M_model->updateProfile($this->session->userdata('id'), $data);
-
-            if ($update_result) {
-                redirect(base_url('karyawan/profil_karyawan'));
+        if (!empty($password_baru)) {
+            if ($password_baru === $konfirmasi_password) {
+                $data['password'] = md5($password_baru);
+                $this->session->set_flashdata('ubah_password', 'Berhasil mengubah password');
             } else {
-                // Pembaruan gagal, Anda dapat menangani ini sesuai kebutuhan
-                echo "Gagal memperbarui profil. Error: " . $this->db->error()['message'];
+                $this->session->set_flashdata('kesalahan_password', 'Password baru dan Konfirmasi password tidak sama');
+                redirect(base_url('karyawan/profile'));
             }
+        }
+
+        $this->session->set_userdata($data);
+        $update_result = $this->m_model->update_data('user', $data, array('id' => $this->session->userdata('id')));
+
+        if ($update_result) {
+            $this->session->set_flashdata('update_akun', 'Data berhasil diperbarui');
+            redirect(base_url('karyawan/profile'));
         } else {
-            // Upload foto gagal, tampilkan pesan kesalahan
-            echo "Gagal mengunggah foto. Error: " . $image_name;
+            $this->session->set_flashdata('gagal_update', 'Gagal memperbarui data');
+            redirect(base_url('karyawan/profile'));
         }
     }
-
-
-    public function aksi_ubah_akun()
+    public function upload_img($value)
     {
-        $image = $this->upload_image('foto');
-        if ($image[0] == false) {
-            $password_baru = $this->input->post('password_baru');
-            $konfirmasi_password = $this->input->post('konfirmasi_password');
-            $email = $this->input->post('email');
-            $username = $this->input->post('username');
-            $first_name = $this->input->post('first_name');
-            $last_name = $this->input->post('last_name');
-            $data = [
-                'image' => 'User.png', // Ganti 'foto' menjadi 'image'
-                'email' => $email,
-                'username' => $username,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-            ];
-
-
-            if (!empty($password_baru)) {
-                if ($password_baru === $konfirmasi_password) {
-                    $data['password'] = md5($password_baru);
-                } else {
-                    $this->session->set_flashdata('message', 'Password baru dan Konfirmasi password harus sama');
-                    redirect(base_url('karyawan/profile'));
-                }
-            }
-            $this->session->set_userdata($data);
-            $update_result = $this->karyawan_model->update('user', $data, ['id' => $this->session->userdata('id')]);
-
-            if ($update_result) {
-                redirect(base_url('karyawan/profile'));
-            } else {
-                redirect(base_url('karyawan/profile'));
-            }
+        $kode = round(microtime(true) * 1000);
+        $config['upload_path'] = './images/';
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['max_size'] = '3000';
+        $config['fle_name'] = $kode;
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload($value)) {
+            return [false, ''];
         } else {
-            $password_baru = $this->input->post('password_baru');
-            $konfirmasi_password = $this->input->post('konfirmasi_password');
-            $email = $this->input->post('email');
-            $username = $this->input->post('username');
-            $first_name = $this->input->post('first_name');
-            $last_name = $this->input->post('last_name');
-            $data = [
-                'foto' => $image[1],
-                'email' => $email,
-                'username' => $username,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-            ];
-            if (!empty($password_baru)) {
-                if ($password_baru === $konfirmasi_password) {
-                    $data['password'] = md5($password_baru);
-                } else {
-                    $this->session->set_flashdata('message', 'Password baru dan Konfirmasi password harus sama');
-                    redirect(base_url('karyawan/profile'));
-                }
-            }
-            $this->session->set_userdata($data);
-            $update_result = $this->karyawan_model->update('user', $data, ['id' => $this->session->userdata('id')]);
-
-            if ($update_result) {
-                redirect(base_url('karyawan/profile'));
-            } else {
-                redirect(base_url('karyawan/profile'));
-            }
+            $fn = $this->upload->data();
+            $nama = $fn['file_name'];
+            return [true, $nama];
         }
     }
-
     public function edit_foto()
     {
-        $config['upload_path'] = './assets/images/user/';
-        $config['allowed_types'] = 'jpg|jpeg|png';
-        $config['max_size'] = 5120;
+        $image = $_FILES['image']['name'];
+        $image_temp = $_FILES['image']['tmp_name'];
 
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('userfile')) {
-            $upload_data = $this->upload->data();
-            $file_name = $upload_data['file_name'];
-
-
-            $user_id = $this->session->userdata('id');
-            $current_image = $this->karyawan_model->get_current_image($user_id);
-
-            if ($current_image !== 'User.png') {
-                unlink('./assets/images/user/' . $current_image);
-            }
-
-            $this->karyawan_model->update_image($user_id, $file_name);
+        // Jika ada image yang diunggah
+        if ($image) {
+            $kode = round(microtime(true) * 1000);
+            $file_name = $kode . '_' . $image;
+            $upload_path = './images/' . $file_name;
             $this->session->set_flashdata('berhasil_ubah_foto', 'Foto berhasil diperbarui.');
+            if (move_uploaded_file($image_temp, $upload_path)) {
+                // Hapus image lama jika ada
+                $old_file = $this->karyawan_model->get_karyawan_image_by_id($this->input->post('id'));
+                if ($old_file && file_exists('./images/' . $old_file)) {
+                    unlink('./images/' . $old_file);
+                }
 
-
-            redirect('karyawan/profile');
+                $data = [
+                    'image' => $file_name
+                ];
+            } else {
+                // Gagal mengunggah image baru
+                redirect(base_url('karyawan/edit_foto/' . $this->input->post('id')));
+            }
         } else {
-            $error = array('error' => $this->upload->display_errors());
-            $this->session->set_flashdata('error_profile', $error['error']);
-            redirect('karyawan');
+            // Jika tidak ada image yang diunggah
+            $data = [
+                'image' => 'User.png'
+            ];
+        }
+
+        // Eksekusi dengan model ubah_data
+        $eksekusi = $this->karyawan_model->ubah_data('user', $data, array('id' => $this->input->post('id')));
+
+        if ($eksekusi) {
+            redirect(base_url('karyawan/profile'));
+        } else {
+            redirect(base_url('karyawan/edit_foto/' . $this->input->post('id')));
         }
     }
     // public function import_karyawan()

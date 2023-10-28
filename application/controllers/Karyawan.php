@@ -96,7 +96,11 @@ class Karyawan extends CI_Controller
             redirect('other_page');
         }
     }
-
+    public function izin()
+    {
+        $data['akun'] = $this->m_model->get_by_id('akun', 'id', $this->session->userdata('id'))->result();
+        $this->load->view('karyawan/izin', $data);
+    }
     public function pulang($absen_id)
     {
         if ($this->session->userdata('role') === 'karyawan') {

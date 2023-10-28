@@ -11,7 +11,7 @@
 
     <style>
         body {
-            background-image: url('https://img.freepik.com/free-vector/realistic-style-technology-particle-background_23-2148426704.jpg');
+            background-image: url('https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2022/12/18/3220925071.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -54,45 +54,44 @@
             <h1 class="text-center text-light">Register Admin</h1>
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <form class="row g-3" action="<?= base_url('Auth/process_register_admin'); ?>" method="post">
-                                <div class="col-md-6">
-                                    <label for="inputName4" class="form-label">First Name</label>
-                                    <input name="first_name" type="first name" class="form-control" id="inputName4">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputPassword4" class="form-label">Last Name</label>
-                                    <input name="last_name" type="last_name" class="form-control" id="inputPassword4">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputPassword" class="form-label">Password</label>
-                                    <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-                                </div>
-                                <div class="col-6">
-                                    <label for="inputAddress2" class="form-label">Username</label>
-                                    <input name="username" type="text" class="form-control" id="inputAddress2" placeholder="Username">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputCity" class="form-label">City</label>
-                                    <input name="" type="text" class="form-control" id="inputCity">
-                                </div>
-                                <div class="text-center py-2 col-12">
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
-                                </div>
-                            </form>
-                            <div class="text-center">
-                                <span><a class="text-white" href="<?= base_url('auth'); ?>">Klik di sini bila sudah memiliki akun</a></span>
-                            </div>
+
+                    <form class="row g-3" action="<?= base_url('Auth/process_register_admin'); ?>" method="post">
+                        <div class="col-md-6">
+                            <label for="inputName4" class="form-label">First Name</label>
+                            <input name="first_name" type="first name" class="form-control" id="inputName4">
                         </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Last Name</label>
+                            <input name="last_name" type="last_name" class="form-control" id="inputPassword4">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                        <div class="col-6">
+                            <label for="inputAddress2" class="form-label">Username</label>
+                            <input name="username" type="text" class="form-control" id="inputAddress2" placeholder="Username">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputCity" class="form-label">City</label>
+                            <input name="" type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="text-center py-2 col-12">
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <span><a class="text-white" href="<?= base_url('auth'); ?>">Klik di sini bila sudah memiliki akun</a></span>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <script>
         function togglePassword() {

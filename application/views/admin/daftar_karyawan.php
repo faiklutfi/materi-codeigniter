@@ -63,8 +63,8 @@
                     <th>Tanggal</th>
                     <th>Kegiatan</th>
                     <th>Izin</th>
-                    <th>Masuk</th>
-                    <th>Pulang</th>
+                    <th>jam Masuk</th>
+                    <th>jam Pulang</th>
                     <th>Status</bth>
 
                 </tr>

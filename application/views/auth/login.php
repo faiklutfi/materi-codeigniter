@@ -11,7 +11,7 @@
 
     <style>
         body {
-            background-image: url('https://media.gettyimages.com/id/1318919777/pt/v%C3%ADdeo/4k-network-digital-background.jpg?s=640x640&k=20&c=rShWdt2hp1jpk9Y7IrLjEkBmAv4DcQyI1zIt5tv-xP8=');
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqMMAgI2ZS4Ir-Ffbw1RIFryYS3fybc869rA&usqp=CAU');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;

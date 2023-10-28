@@ -7,6 +7,76 @@
     <title>Riwayat Absen</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #373193;
+        }
+
+        table {
+            background-color: #fff;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+
+        th {
+            background-color: #373193;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .modal-title {
+            color: #373193;
+        }
+
+        .modal-body {
+            background-color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #373193;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d1d7a;
+        }
+
+        .btn-secondary {
+            background-color: #ccc;
+        }
+
+        .btn-danger {
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #1e7e34;
+        }
+    </style>
 </head>
 
 <body>
@@ -43,7 +113,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive panjang">
                 <thead style="background-color: #373193;" class="table">
                     <tr class="text-center">
                         <th>No</th>
@@ -73,17 +143,22 @@
                                 <?php if ($row->status == 'done') : ?>
                                     <!-- Jika sudah selesai, tampilkan tombol Izin -->
                                     Izin
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $row->id; ?>)" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                            <td>
+                            <?php else : ?>
+                                <?php if ($row->status == 'pulang') : ?>
+                                    <!-- Jika status 'pulang', tampilkan tombol "Batal Pulang" -->
+                                    <a href="<?php echo site_url('karyawan/batal_pulang/' . $row->id); ?>" class="btn btn-success disabled" aria-disabled="true"><i class="fa-solid fa-house"></i></a>
                                 <?php else : ?>
-                                    <?php if ($row->status == 'pulang') : ?>
-                                        <!-- Jika status 'pulang', tampilkan tombol "Batal Pulang" -->
-                                        <a href="<?php echo site_url('karyawan/batal_pulang/' . $row->id); ?>" class="btn btn-success disabled" aria-disabled="true"><i class="fa-solid fa-house"></i></a>
-                                    <?php else : ?>
-                                        <!-- Jika status bukan 'pulang', tampilkan tombol "Pulang" -->
-                                        <a href="<?php echo site_url('karyawan/pulang/' . $row->id); ?>" class="btn btn-success" id="pulangButton_<?php echo $row->id; ?>">
-                                            <i class="fa-solid fa-house"></i>
-                                        </a>
-                                    <?php endif; ?>
+                                    <!-- Jika status bukan 'pulang', tampilkan tombol "Pulang" -->
+                                    <a href="<?php echo site_url('karyawan/pulang/' . $row->id); ?>" class="btn btn-success" id="pulangButton_<?php echo $row->id; ?>">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
                                 <?php endif; ?>
+                            <?php endif; ?>
                             </td>
                             <td>
                                 <?php if ($row->status != 'done') : ?>

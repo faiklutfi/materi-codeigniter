@@ -483,11 +483,12 @@
                 <button class="menu-toggle">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <a href="#" class="brand-logo"> <span>ADMIN </span> <span class="text-primary"></span></a>
+                <a href="#" class="brand-logo"> <span>ADMIN</span> <span class="text-primary"></span></a>
             </header>
             <nav class="dashboard-nav-list">
                 <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-users"></i>Dashboard
                 </a>
+
                 <a href="<?= base_url('admin/daftar_karyawan'); ?>" class="dashboard-nav-item"></i><i class="fa-solid fa-person"></i> Karyawan
                 </a>
                 <a href="<?= base_url('admin/rekap_harian'); ?>" class="dashboard-nav-item"></i> <i class="fa-solid fa-bicycle"></i>Rekap Harian

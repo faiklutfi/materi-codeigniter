@@ -130,11 +130,12 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">Kegiatan</th>
                                             <th scope="col">Tanggal</th>
+                                            <th scope="col">Kegiatan</th>
                                             <th scope="col">Jam Masuk</th>
                                             <th scope="col">Jam Pulang</th>
                                             <th scope="col">Keterangan</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
